@@ -49,6 +49,9 @@
     <Compile Include="dragdrop.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="drawing.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>

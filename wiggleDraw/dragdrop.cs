@@ -62,7 +62,7 @@ namespace wiggleDraw
                 }
                 thumbnail.Visible = false;
                 image = nextImage;
-                AdjustView();
+                //AdjustView();
                 if ((pb_original.Image != null) && (pb_original.Image != nextImage))
                 {
                     pb_original.Image.Dispose();
