@@ -35,6 +35,7 @@
             this.pb_draw = new System.Windows.Forms.PictureBox();
             this.label_output = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.process_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             this.SuspendLayout();
@@ -61,9 +62,9 @@
             // 
             // debugBox
             // 
-            this.debugBox.Location = new System.Drawing.Point(26, 451);
+            this.debugBox.Location = new System.Drawing.Point(26, 380);
             this.debugBox.Name = "debugBox";
-            this.debugBox.Size = new System.Drawing.Size(356, 255);
+            this.debugBox.Size = new System.Drawing.Size(359, 74);
             this.debugBox.TabIndex = 2;
             this.debugBox.Text = "";
             // 
@@ -95,12 +96,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // process_button
+            // 
+            this.process_button.Location = new System.Drawing.Point(26, 672);
+            this.process_button.Name = "process_button";
+            this.process_button.Size = new System.Drawing.Size(75, 23);
+            this.process_button.TabIndex = 6;
+            this.process_button.Text = "Process it";
+            this.process_button.UseVisualStyleBackColor = true;
+            this.process_button.Click += new System.EventHandler(this.process_button_Click);
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 718);
+            this.Controls.Add(this.process_button);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label_output);
             this.Controls.Add(this.pb_draw);
@@ -130,6 +142,7 @@
         private System.Windows.Forms.PictureBox pb_draw;
         private System.Windows.Forms.Label label_output;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button process_button;
     }
 }
 

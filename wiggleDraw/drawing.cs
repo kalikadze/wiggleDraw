@@ -12,22 +12,8 @@ using System.Threading;
 
 namespace wiggleDraw
 {
-    public partial class mainForm : Form
+    class drawer
     {
-        private System.Drawing.Graphics g;
-        private System.Drawing.Pen pen1 = new System.Drawing.Pen(Color.Blue, 2F);
-        Random rnd = new Random();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            g = pb_draw.CreateGraphics();
-            for (int i = 0; i < 100; i++)
-            {
-                //pen1.Color.A = 10;
-                pen1.Color = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
-                g.DrawLine(pen1, rnd.Next(1, 650), rnd.Next(1, 650), rnd.Next(1, 650), rnd.Next(1, 650));
-                //g.draw
-            }
-        }
     }
 }
