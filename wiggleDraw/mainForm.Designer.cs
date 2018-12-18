@@ -40,10 +40,13 @@
             this.trackBarFreq = new System.Windows.Forms.TrackBar();
             this.labelFreq = new System.Windows.Forms.Label();
             this.labelAmplitude = new System.Windows.Forms.Label();
+            this.trackBarLinesCount = new System.Windows.Forms.TrackBar();
+            this.labelLinesCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).BeginInit();
             this.SuspendLayout();
             // 
             // pb_original
@@ -151,6 +154,27 @@
             this.labelAmplitude.TabIndex = 9;
             this.labelAmplitude.Text = "Amplitude";
             // 
+            // trackBarLinesCount
+            // 
+            this.trackBarLinesCount.Location = new System.Drawing.Point(148, 410);
+            this.trackBarLinesCount.Maximum = 200;
+            this.trackBarLinesCount.Minimum = 10;
+            this.trackBarLinesCount.Name = "trackBarLinesCount";
+            this.trackBarLinesCount.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarLinesCount.Size = new System.Drawing.Size(45, 169);
+            this.trackBarLinesCount.TabIndex = 7;
+            this.trackBarLinesCount.Value = 10;
+            this.trackBarLinesCount.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            // 
+            // labelLinesCount
+            // 
+            this.labelLinesCount.AutoSize = true;
+            this.labelLinesCount.Location = new System.Drawing.Point(145, 391);
+            this.labelLinesCount.Name = "labelLinesCount";
+            this.labelLinesCount.Size = new System.Drawing.Size(32, 13);
+            this.labelLinesCount.TabIndex = 8;
+            this.labelLinesCount.Text = "Lines";
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
@@ -158,7 +182,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 718);
             this.Controls.Add(this.labelAmplitude);
+            this.Controls.Add(this.labelLinesCount);
             this.Controls.Add(this.labelFreq);
+            this.Controls.Add(this.trackBarLinesCount);
             this.Controls.Add(this.trackBarFreq);
             this.Controls.Add(this.trackBarAmpl);
             this.Controls.Add(this.process_button);
@@ -180,6 +206,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +225,8 @@
         private System.Windows.Forms.TrackBar trackBarFreq;
         private System.Windows.Forms.Label labelFreq;
         private System.Windows.Forms.Label labelAmplitude;
+        private System.Windows.Forms.TrackBar trackBarLinesCount;
+        private System.Windows.Forms.Label labelLinesCount;
     }
 }
 

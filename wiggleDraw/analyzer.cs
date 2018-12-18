@@ -14,6 +14,14 @@ namespace wiggleDraw
         public int maxValPixel = Int32.MinValue;
         public int valPixel;
 
+        private int[,] matrix;
+
+
+        Analyzer(PictureBox pb, int lines, int details)
+        {
+            matrix = new int[details, lines];
+        }
+
         public void readPic(PictureBox pb)
         {
             Color pixel;
@@ -38,6 +46,8 @@ namespace wiggleDraw
             }
 
         }
+
+
 
         public int getMinPixel()
         {            

@@ -33,12 +33,14 @@ namespace wiggleDraw
 
         private void process_button_Click(object sender, EventArgs e)
         {
+            /*
             Analyzer analyzer = new Analyzer();
             analyzer.readPic(pb_original);
             debugBox.AppendText("Min Pixel: " + analyzer.getMinPixel());
             debugBox.AppendText(Environment.NewLine);
             debugBox.AppendText("Max Pixel: " + analyzer.getMaxPixel());
             debugBox.AppendText(Environment.NewLine);
+            */
         }
 
 
