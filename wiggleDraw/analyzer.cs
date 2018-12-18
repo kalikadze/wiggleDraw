@@ -47,8 +47,6 @@ namespace wiggleDraw
 
         }
 
-
-
         public int getMinPixel()
         {            
             return minValPixel;

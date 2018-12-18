@@ -42,6 +42,8 @@
             this.labelAmplitude = new System.Windows.Forms.Label();
             this.trackBarLinesCount = new System.Windows.Forms.TrackBar();
             this.labelLinesCount = new System.Windows.Forms.Label();
+            this.buttonOpenFile = new System.Windows.Forms.Button();
+            this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
@@ -175,12 +177,30 @@
             this.labelLinesCount.TabIndex = 8;
             this.labelLinesCount.Text = "Lines";
             // 
+            // buttonOpenFile
+            // 
+            this.buttonOpenFile.Image = global::wiggleDraw.Properties.Resources.Pelfusion_Flat_Folder_Open_Folder;
+            this.buttonOpenFile.Location = new System.Drawing.Point(310, 380);
+            this.buttonOpenFile.Name = "buttonOpenFile";
+            this.buttonOpenFile.Size = new System.Drawing.Size(75, 36);
+            this.buttonOpenFile.TabIndex = 10;
+            this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
+            // 
+            // openPictureDialog
+            // 
+            this.openPictureDialog.DefaultExt = "\"jpg\"";
+            this.openPictureDialog.Filter = "Pictures |*.jpg;*.bmp;*.png";
+            this.openPictureDialog.InitialDirectory = "@\"c:\\\"";
+            this.openPictureDialog.Title = "Browse pictures ...";
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 718);
+            this.Controls.Add(this.buttonOpenFile);
             this.Controls.Add(this.labelAmplitude);
             this.Controls.Add(this.labelLinesCount);
             this.Controls.Add(this.labelFreq);
@@ -227,6 +247,8 @@
         private System.Windows.Forms.Label labelAmplitude;
         private System.Windows.Forms.TrackBar trackBarLinesCount;
         private System.Windows.Forms.Label labelLinesCount;
+        private System.Windows.Forms.Button buttonOpenFile;
+        private System.Windows.Forms.OpenFileDialog openPictureDialog;
     }
 }
 

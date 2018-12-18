@@ -52,8 +52,6 @@ namespace wiggleDraw
         /* debug */
         private void pb_draw_Paint(object sender, PaintEventArgs e, float ampl, float freq)
         {
-            // best 274ms
-            // now best 12ms
             Stopwatch sw = new Stopwatch();
 
             Graphics gr;
@@ -99,6 +97,15 @@ namespace wiggleDraw
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
+        }
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = openPictureDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                pb_original.Image = Image.FromFile(openPictureDialog.FileName);
+            }
         }
     }
 }

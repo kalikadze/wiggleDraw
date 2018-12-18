@@ -50,9 +50,6 @@ namespace wiggleDraw
 
         private void OnDragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            //debugBox.AppendText("OnDrag drop");
-            //debugBox.AppendText(Environment.NewLine);
-
             if (validData)
             {
                 while (getImageThread.IsAlive)
@@ -62,7 +59,6 @@ namespace wiggleDraw
                 }
                 thumbnail.Visible = false;
                 image = nextImage;
-                //AdjustView();
                 if ((pb_original.Image != null) && (pb_original.Image != nextImage))
                 {
                     pb_original.Image.Dispose();
@@ -73,16 +69,11 @@ namespace wiggleDraw
 
         private void OnDragLeave(object sender, System.EventArgs e)
         {
-            //debugBox.AppendText("OnDrag leave");
-            //debugBox.AppendText(Environment.NewLine);
             thumbnail.Visible = false;
         }
 
         private void OnDragOver(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            //debugBox.AppendText("OnDrag over");
-            //debugBox.AppendText(Environment.NewLine);
-
             if (validData)
             {
                 if ((e.X != lastX) || (e.Y != lastY))
@@ -95,10 +86,6 @@ namespace wiggleDraw
         private void onDragEnter(object sender, DragEventArgs e)
         {
             string filename;
-
-            //debugBox.AppendText("OnDrag fired");
-            //debugBox.AppendText(Environment.NewLine);
-
             validData = GetFilename(out filename, e);
             if (validData)
             {
@@ -153,42 +140,6 @@ namespace wiggleDraw
                 p.Y -= thumbnail.Height / 2;
                 thumbnail.Location = p;
                 thumbnail.Visible = true;
-            }
-        }
-
-        protected void AdjustView()
-        {
-            float fw = this.ClientSize.Width;
-            float fh = this.ClientSize.Height;
-            float iw = image.Width;
-            float ih = image.Height;
-
-            // iw/fw > ih/fh, then iw/fw controls ih
-
-            float rw = fw / iw;         // ratio of width
-            float rh = fh / ih;         // ratio of height
-
-            if (rw < rh)
-            {                
-                pb_original.Width = (int)fw;
-                pb_original.Height = (int)(ih * rw);
-                pb_original.Left = 0;
-                pb_original.Top = (int)((fh - pb_original.Height) / 2);
-            }
-            else
-            {
-                pb_original.Width = (int)(iw * rh);
-                pb_original.Height = (int)fh;
-                pb_original.Left = (int)((fw - pb_original.Width) / 2);
-                pb_original.Top = 0;
-            }
-        }
-
-        protected override void OnLayout(LayoutEventArgs levent)
-        {
-            if (image != null)
-            {
-                AdjustView();
             }
         }
     }
