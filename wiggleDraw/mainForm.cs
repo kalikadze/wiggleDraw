@@ -20,6 +20,7 @@ namespace wiggleDraw
         {
             InitializeComponent();
 
+            this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler((s, e) => this.pb_draw_Paint(s, e, trackBarAmpl.Value, trackBarFreq.Value));
             thumbnail = new PictureBox();
             thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
             pb_original.Controls.Add(thumbnail);
@@ -28,8 +29,6 @@ namespace wiggleDraw
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
         }
 
         private void process_button_Click(object sender, EventArgs e)
@@ -43,10 +42,16 @@ namespace wiggleDraw
         }
 
 
-        /* debug */
         private void button1_Click(object sender, EventArgs e)
         {
+            pb_draw.Refresh();
+        }
+
+        /* debug */
+        private void pb_draw_Paint(object sender, PaintEventArgs e, float ampl, float freq)
+        {
             // best 274ms
+            // now best 12ms
             Stopwatch sw = new Stopwatch();
 
             Graphics gr;
@@ -62,26 +67,36 @@ namespace wiggleDraw
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
             float y = 0, y2 = 0, x2 = 0;
-            float sc = 20F;
+            float offset = 300;
 
             sw.Start();
-            for (float x = 0; x < pb_draw.Width; x += 0.5F)
+            for (float x = 0; x < pb_draw.Width; x +=1F)
             {
                 //draw a sine
                 //pen1.Color = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
-                y = (float)Math.Sin(x);
+                y = (float)Math.Sin(x * freq/1000)*ampl;
 
-                gr.DrawLine(pen1, x*sc/2, y*sc+100, x2*sc/2, y2*sc+100);
+                gr.DrawLine(pen1, x, y + offset, x2, y2 + offset);
                 x2 = x;
                 y2 = y;
 
             }
-            gr_pb_draw.DrawImageUnscaled(drawing, 0, 0);
+            e.Graphics.DrawImageUnscaled(drawing, 0, 0);
 
             sw.Stop();
             debugBox.AppendText("Elapsed time (ms): " + sw.ElapsedMilliseconds);
             debugBox.AppendText(Environment.NewLine);
             /* debug */
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            pb_draw.Refresh();
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            pb_draw.Refresh();
         }
     }
 }

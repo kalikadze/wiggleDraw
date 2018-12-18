@@ -36,8 +36,14 @@
             this.label_output = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.process_button = new System.Windows.Forms.Button();
+            this.trackBarAmpl = new System.Windows.Forms.TrackBar();
+            this.trackBarFreq = new System.Windows.Forms.TrackBar();
+            this.labelFreq = new System.Windows.Forms.Label();
+            this.labelAmplitude = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).BeginInit();
             this.SuspendLayout();
             // 
             // pb_original
@@ -62,9 +68,9 @@
             // 
             // debugBox
             // 
-            this.debugBox.Location = new System.Drawing.Point(26, 380);
+            this.debugBox.Location = new System.Drawing.Point(26, 585);
             this.debugBox.Name = "debugBox";
-            this.debugBox.Size = new System.Drawing.Size(359, 167);
+            this.debugBox.Size = new System.Drawing.Size(359, 81);
             this.debugBox.TabIndex = 2;
             this.debugBox.Text = "";
             // 
@@ -106,12 +112,55 @@
             this.process_button.UseVisualStyleBackColor = true;
             this.process_button.Click += new System.EventHandler(this.process_button_Click);
             // 
+            // trackBarAmpl
+            // 
+            this.trackBarAmpl.Location = new System.Drawing.Point(26, 410);
+            this.trackBarAmpl.Maximum = 200;
+            this.trackBarAmpl.Name = "trackBarAmpl";
+            this.trackBarAmpl.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarAmpl.Size = new System.Drawing.Size(45, 169);
+            this.trackBarAmpl.TabIndex = 7;
+            this.trackBarAmpl.Value = 1;
+            this.trackBarAmpl.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // trackBarFreq
+            // 
+            this.trackBarFreq.Location = new System.Drawing.Point(88, 410);
+            this.trackBarFreq.Maximum = 2000;
+            this.trackBarFreq.Name = "trackBarFreq";
+            this.trackBarFreq.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarFreq.Size = new System.Drawing.Size(45, 169);
+            this.trackBarFreq.TabIndex = 7;
+            this.trackBarFreq.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            // 
+            // labelFreq
+            // 
+            this.labelFreq.AutoSize = true;
+            this.labelFreq.Location = new System.Drawing.Point(85, 391);
+            this.labelFreq.Name = "labelFreq";
+            this.labelFreq.Size = new System.Drawing.Size(57, 13);
+            this.labelFreq.TabIndex = 8;
+            this.labelFreq.Text = "Frequency";
+            // 
+            // labelAmplitude
+            // 
+            this.labelAmplitude.AutoSize = true;
+            this.labelAmplitude.Location = new System.Drawing.Point(26, 391);
+            this.labelAmplitude.Name = "labelAmplitude";
+            this.labelAmplitude.Size = new System.Drawing.Size(53, 13);
+            this.labelAmplitude.TabIndex = 9;
+            this.labelAmplitude.Text = "Amplitude";
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 718);
+            this.Controls.Add(this.labelAmplitude);
+            this.Controls.Add(this.labelFreq);
+            this.Controls.Add(this.trackBarFreq);
+            this.Controls.Add(this.trackBarAmpl);
             this.Controls.Add(this.process_button);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label_output);
@@ -129,6 +178,8 @@
             this.DragLeave += new System.EventHandler(this.OnDragLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,6 +194,10 @@
         private System.Windows.Forms.Label label_output;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button process_button;
+        private System.Windows.Forms.TrackBar trackBarAmpl;
+        private System.Windows.Forms.TrackBar trackBarFreq;
+        private System.Windows.Forms.Label labelFreq;
+        private System.Windows.Forms.Label labelAmplitude;
     }
 }
 
