@@ -50,8 +50,8 @@ namespace wiggleDraw
 
         private void OnDragDrop(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            debugBox.AppendText("OnDrag drop");
-            debugBox.AppendText(Environment.NewLine);
+            //debugBox.AppendText("OnDrag drop");
+            //debugBox.AppendText(Environment.NewLine);
 
             if (validData)
             {
@@ -73,15 +73,15 @@ namespace wiggleDraw
 
         private void OnDragLeave(object sender, System.EventArgs e)
         {
-            debugBox.AppendText("OnDrag leave");
-            debugBox.AppendText(Environment.NewLine);
+            //debugBox.AppendText("OnDrag leave");
+            //debugBox.AppendText(Environment.NewLine);
             thumbnail.Visible = false;
         }
 
         private void OnDragOver(object sender, System.Windows.Forms.DragEventArgs e)
         {
-            debugBox.AppendText("OnDrag over");
-            debugBox.AppendText(Environment.NewLine);
+            //debugBox.AppendText("OnDrag over");
+            //debugBox.AppendText(Environment.NewLine);
 
             if (validData)
             {
@@ -96,8 +96,8 @@ namespace wiggleDraw
         {
             string filename;
 
-            debugBox.AppendText("OnDrag fired");
-            debugBox.AppendText(Environment.NewLine);
+            //debugBox.AppendText("OnDrag fired");
+            //debugBox.AppendText(Environment.NewLine);
 
             validData = GetFilename(out filename, e);
             if (validData)

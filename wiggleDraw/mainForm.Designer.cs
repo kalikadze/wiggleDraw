@@ -64,7 +64,7 @@
             // 
             this.debugBox.Location = new System.Drawing.Point(26, 380);
             this.debugBox.Name = "debugBox";
-            this.debugBox.Size = new System.Drawing.Size(359, 74);
+            this.debugBox.Size = new System.Drawing.Size(359, 167);
             this.debugBox.TabIndex = 2;
             this.debugBox.Text = "";
             // 

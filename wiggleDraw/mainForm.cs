@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
+using System.Collections;
+using System.ComponentModel;
 
 namespace wiggleDraw
 {
@@ -43,25 +46,41 @@ namespace wiggleDraw
         /* debug */
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Drawing.Graphics g;
-            System.Drawing.Pen pen1 = new System.Drawing.Pen(Color.Blue, 1F);
+            // best 274ms
+            Stopwatch sw = new Stopwatch();
+
+            Graphics gr;
+            Graphics gr_pb_draw;
+            Bitmap drawing = null;
+
+            drawing = new Bitmap(pb_draw.Width, pb_draw.Height);
+
+            Pen pen1 = new System.Drawing.Pen(Color.Blue, 1F);
             Random rnd = new Random();
-            g = pb_draw.CreateGraphics();
+            gr_pb_draw = pb_draw.CreateGraphics();
+            gr = Graphics.FromImage(drawing);
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
             float y = 0, y2 = 0, x2 = 0;
             float sc = 20F;
 
-            for (float x = 0; x < pb_draw.Width; x += 0.1F)
+            sw.Start();
+            for (float x = 0; x < pb_draw.Width; x += 0.5F)
             {
                 //draw a sine
                 //pen1.Color = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
                 y = (float)Math.Sin(x);
 
-                g.DrawLine(pen1, x*sc/2, y*sc+100, x2*sc/2, y2*sc+100);
+                gr.DrawLine(pen1, x*sc/2, y*sc+100, x2*sc/2, y2*sc+100);
                 x2 = x;
                 y2 = y;
 
             }
+            gr_pb_draw.DrawImageUnscaled(drawing, 0, 0);
+
+            sw.Stop();
+            debugBox.AppendText("Elapsed time (ms): " + sw.ElapsedMilliseconds);
+            debugBox.AppendText(Environment.NewLine);
             /* debug */
         }
     }
