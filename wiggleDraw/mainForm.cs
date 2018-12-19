@@ -20,73 +20,33 @@ namespace wiggleDraw
         {
             InitializeComponent();
 
-            this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler((s, e) => this.pb_draw_Paint(s, e, trackBarAmpl.Value, trackBarFreq.Value));
+            //this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler((s, e) => this.pb_draw_Paint(s, e, trackBarAmpl.Value, trackBarFreq.Value));
             thumbnail = new PictureBox();
             thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
             pb_original.Controls.Add(thumbnail);
             thumbnail.Visible = false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
         private void process_button_Click(object sender, EventArgs e)
         {
+            long[,] cmat, amat;
+
+            Analyzer analyzer = new Analyzer(pb_original, 20, 10);
+            analyzer.analyze(pb_original);
+            Drawer drawer = new Drawer(pb_original);
+
+            cmat = analyzer.getColorMatrix();
+            amat = analyzer.getAlphaMatrix();
+
+            drawer.generate(pb_draw, 0, 20, 10, 100, 100);
+
+
             /*
-            Analyzer analyzer = new Analyzer();
-            analyzer.readPic(pb_original);
             debugBox.AppendText("Min Pixel: " + analyzer.getMinPixel());
             debugBox.AppendText(Environment.NewLine);
             debugBox.AppendText("Max Pixel: " + analyzer.getMaxPixel());
             debugBox.AppendText(Environment.NewLine);
             */
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pb_draw.Refresh();
-        }
-
-        /* debug */
-        private void pb_draw_Paint(object sender, PaintEventArgs e, float ampl, float freq)
-        {
-            Stopwatch sw = new Stopwatch();
-
-            Graphics gr;
-            Graphics gr_pb_draw;
-            Bitmap drawing = null;
-
-            drawing = new Bitmap(pb_draw.Width, pb_draw.Height);
-
-            Pen pen1 = new System.Drawing.Pen(Color.Blue, 1F);
-            Random rnd = new Random();
-            gr_pb_draw = pb_draw.CreateGraphics();
-            gr = Graphics.FromImage(drawing);
-            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
-            float y = 0, y2 = 0, x2 = 0;
-            float offset = 300;
-
-            sw.Start();
-            for (float x = 0; x < pb_draw.Width; x +=1F)
-            {
-                //draw a sine
-                //pen1.Color = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
-                y = (float)Math.Sin(x * freq/1000)*ampl;
-
-                gr.DrawLine(pen1, x, y + offset, x2, y2 + offset);
-                x2 = x;
-                y2 = y;
-
-            }
-            e.Graphics.DrawImageUnscaled(drawing, 0, 0);
-
-            sw.Stop();
-            debugBox.AppendText("Elapsed time (ms): " + sw.ElapsedMilliseconds);
-            debugBox.AppendText(Environment.NewLine);
-            /* debug */
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -106,6 +66,11 @@ namespace wiggleDraw
             {
                 pb_original.Image = Image.FromFile(openPictureDialog.FileName);
             }
+        }
+
+        private void pb_draw_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

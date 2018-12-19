@@ -34,7 +34,6 @@
             this.debugBox = new System.Windows.Forms.RichTextBox();
             this.pb_draw = new System.Windows.Forms.PictureBox();
             this.label_output = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.process_button = new System.Windows.Forms.Button();
             this.trackBarAmpl = new System.Windows.Forms.TrackBar();
             this.trackBarFreq = new System.Windows.Forms.TrackBar();
@@ -87,6 +86,7 @@
             this.pb_draw.Size = new System.Drawing.Size(804, 672);
             this.pb_draw.TabIndex = 3;
             this.pb_draw.TabStop = false;
+            this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_draw_Paint);
             // 
             // label_output
             // 
@@ -96,16 +96,6 @@
             this.label_output.Size = new System.Drawing.Size(82, 13);
             this.label_output.TabIndex = 4;
             this.label_output.Text = "Output graphics";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(298, 672);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // process_button
             // 
@@ -208,7 +198,6 @@
             this.Controls.Add(this.trackBarFreq);
             this.Controls.Add(this.trackBarAmpl);
             this.Controls.Add(this.process_button);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label_output);
             this.Controls.Add(this.pb_draw);
             this.Controls.Add(this.pb_original);
@@ -217,7 +206,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainForm";
             this.Text = "WiggleDraw 0.1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.onDragEnter);
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.OnDragOver);
@@ -239,7 +227,6 @@
         private System.Windows.Forms.RichTextBox debugBox;
         private System.Windows.Forms.PictureBox pb_draw;
         private System.Windows.Forms.Label label_output;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button process_button;
         private System.Windows.Forms.TrackBar trackBarAmpl;
         private System.Windows.Forms.TrackBar trackBarFreq;

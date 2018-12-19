@@ -10,41 +10,82 @@ namespace wiggleDraw
 {
     class Analyzer
     {
-        public int minValPixel = Int32.MaxValue;
-        public int maxValPixel = Int32.MinValue;
-        public int valPixel;
+        private int minValPixel = Int32.MaxValue;
+        private int maxValPixel = Int32.MinValue;
+        private int valPixel;
 
-        private int[,] matrix;
+        private long[,] cmat;
+        private long[,] amat;
+        private int xseg;
+        private int yseg;
 
 
-        Analyzer(PictureBox pb, int lines, int details)
+        public Analyzer(PictureBox pb, int yseg, int xseg)
         {
-            matrix = new int[details, lines];
+            cmat = new long[pb.Image.Width / xseg, pb.Image.Height / yseg];
+            amat = new long[pb.Image.Width / xseg, pb.Image.Height / yseg];
+
+            this.xseg = xseg;
+            this.yseg = yseg;
+
+            for (int i = 0; i < pb.Image.Width / xseg; i++)
+                for (int j = 0; j < pb.Image.Height / yseg; j++)
+                {
+                    cmat[i, j] = Int32.MaxValue;
+                    amat[i, j] = Int32.MaxValue;
+                }
         }
 
-        public void readPic(PictureBox pb)
+        public void analyze(PictureBox pb)
         {
             Color pixel;
             Color minPixel;
             Color maxPixel;
 
+            long avgSegC;    // average color per segment
+            long avgSegA;    // average alpha per segment
+            long argbpix;    
+            long cntSeg;     // segment points
+
+
             if (pb.Image != null)
             {
                 Bitmap img = (Bitmap)pb.Image.Clone();
 
-                for (int i = 0; i < pb.Width; i++)
-                    for (int j = 0; j < pb.Height; j++)
+                for (int x = 0; x < img.Width / xseg; x++)
+                    for (int y = 0; y < img.Height / yseg; y++)
                     {
-                        pixel = img.GetPixel(i, j);
-                        valPixel = pixel.ToArgb();
+                        avgSegC = 0;
+                        avgSegA = 0;
+                        cntSeg = 0;
 
-                        if (valPixel < minValPixel)
-                            minValPixel = valPixel;
-                        if (valPixel > maxValPixel)
-                            maxValPixel = valPixel;
+                        for (int xx = 0; xx < xseg; xx++)
+                            for (int yy = 0; yy < yseg; yy++)
+                            {
+                                if (((xx + xseg * x) < img.Width) && ((yy + yseg * y) < img.Height))
+                                {
+                                    pixel = img.GetPixel(xx + xseg * x, yy + yseg * y);
+                                    argbpix = pixel.ToArgb();
+                                    avgSegC += argbpix;
+                                    avgSegA += pixel.A;
+                                    cntSeg++;
+                                }
+                            }
+                        avgSegC /= cntSeg;
+                        avgSegA /= cntSeg;
+                        cmat[x, y] = avgSegC;
+                        amat[x, y] = avgSegA;
                     }
             }
+        }
 
+        public long[,] getColorMatrix()
+        {
+            return cmat;
+        }
+        public long[,] getAlphaMatrix()
+        {
+            return amat;
         }
 
         public int getMinPixel()
@@ -58,3 +99,19 @@ namespace wiggleDraw
         }
     }
 }
+
+
+//junkyard
+/*
+                for (int i = 0; i < pb.Width; i++)
+                    for (int j = 0; j < pb.Height; j++)
+                    {
+                        pixel = img.GetPixel(i, j);
+                        valPixel = pixel.ToArgb();
+
+                        if (valPixel < minValPixel)
+                            minValPixel = valPixel;
+                        if (valPixel > maxValPixel)
+                            maxValPixel = valPixel;
+                    }
+                    */
