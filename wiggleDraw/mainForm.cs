@@ -27,34 +27,20 @@ namespace wiggleDraw
             thumbnail.Visible = false;
         }
 
-        private void process_button_Click(object sender, EventArgs e)
+        private void trackBarFreq_Scroll(object sender, EventArgs e)
         {
-            long[,] cmat, amat;
-
-            Analyzer analyzer = new Analyzer(pb_original, 20, 10);
-            analyzer.analyze(pb_original);
-            Drawer drawer = new Drawer(pb_original);
-
-            cmat = analyzer.getColorMatrix();
-            amat = analyzer.getAlphaMatrix();
-
-            drawer.generate(pb_draw, 0, 20, 10, 100, 100);
-
-
-            /*
-            debugBox.AppendText("Min Pixel: " + analyzer.getMinPixel());
-            debugBox.AppendText(Environment.NewLine);
-            debugBox.AppendText("Max Pixel: " + analyzer.getMaxPixel());
-            debugBox.AppendText(Environment.NewLine);
-            */
+            pb_draw.Refresh();
         }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void trackBarAmpl_Scroll(object sender, EventArgs e)
+        {
+            pb_draw.Refresh();
+        }
+        private void trackBarLines_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
         }
 
-        private void trackBar2_Scroll(object sender, EventArgs e)
+        private void trackBarDetails_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
         }
@@ -70,7 +56,19 @@ namespace wiggleDraw
 
         private void pb_draw_Paint(object sender, PaintEventArgs e)
         {
+            if (pb_original.Image != null)
+            {
+                long[,] cmat, amat;
 
+                Analyzer analyzer = new Analyzer(pb_original, 20, 10);
+                analyzer.analyze(pb_original);
+                Drawer drawer = new Drawer(pb_draw);
+
+                cmat = analyzer.getColorMatrix();
+                amat = analyzer.getAlphaMatrix();
+
+                drawer.generate(e, pb_draw, trackBarDetails.Value, trackBarLinesCount.Value, trackBarAmpl.Value, trackBarFreq.Value);
+            }
         }
     }
 }

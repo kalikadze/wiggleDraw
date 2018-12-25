@@ -1,4 +1,6 @@
-﻿namespace wiggleDraw
+﻿using System;
+
+namespace wiggleDraw
 {
     partial class mainForm
     {
@@ -34,7 +36,6 @@
             this.debugBox = new System.Windows.Forms.RichTextBox();
             this.pb_draw = new System.Windows.Forms.PictureBox();
             this.label_output = new System.Windows.Forms.Label();
-            this.process_button = new System.Windows.Forms.Button();
             this.trackBarAmpl = new System.Windows.Forms.TrackBar();
             this.trackBarFreq = new System.Windows.Forms.TrackBar();
             this.labelFreq = new System.Windows.Forms.Label();
@@ -43,11 +44,14 @@
             this.labelLinesCount = new System.Windows.Forms.Label();
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
+            this.trackBarDetails = new System.Windows.Forms.TrackBar();
+            this.labelDetail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // pb_original
@@ -83,7 +87,7 @@
             this.pb_draw.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pb_draw.Location = new System.Drawing.Point(400, 34);
             this.pb_draw.Name = "pb_draw";
-            this.pb_draw.Size = new System.Drawing.Size(804, 672);
+            this.pb_draw.Size = new System.Drawing.Size(1244, 892);
             this.pb_draw.TabIndex = 3;
             this.pb_draw.TabStop = false;
             this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_draw_Paint);
@@ -97,41 +101,31 @@
             this.label_output.TabIndex = 4;
             this.label_output.Text = "Output graphics";
             // 
-            // process_button
-            // 
-            this.process_button.Location = new System.Drawing.Point(26, 672);
-            this.process_button.Name = "process_button";
-            this.process_button.Size = new System.Drawing.Size(75, 23);
-            this.process_button.TabIndex = 6;
-            this.process_button.Text = "Process it";
-            this.process_button.UseVisualStyleBackColor = true;
-            this.process_button.Click += new System.EventHandler(this.process_button_Click);
-            // 
             // trackBarAmpl
             // 
             this.trackBarAmpl.Location = new System.Drawing.Point(26, 410);
-            this.trackBarAmpl.Maximum = 200;
+            this.trackBarAmpl.Maximum = 20;
             this.trackBarAmpl.Name = "trackBarAmpl";
             this.trackBarAmpl.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarAmpl.Size = new System.Drawing.Size(45, 169);
             this.trackBarAmpl.TabIndex = 7;
             this.trackBarAmpl.Value = 1;
-            this.trackBarAmpl.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBarAmpl.Scroll += new System.EventHandler(this.trackBarAmpl_Scroll);
             // 
             // trackBarFreq
             // 
-            this.trackBarFreq.Location = new System.Drawing.Point(88, 410);
-            this.trackBarFreq.Maximum = 2000;
+            this.trackBarFreq.Location = new System.Drawing.Point(82, 410);
+            this.trackBarFreq.Maximum = 500;
             this.trackBarFreq.Name = "trackBarFreq";
             this.trackBarFreq.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarFreq.Size = new System.Drawing.Size(45, 169);
             this.trackBarFreq.TabIndex = 7;
-            this.trackBarFreq.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBarFreq.Scroll += new System.EventHandler(this.trackBarFreq_Scroll);
             // 
             // labelFreq
             // 
             this.labelFreq.AutoSize = true;
-            this.labelFreq.Location = new System.Drawing.Point(85, 391);
+            this.labelFreq.Location = new System.Drawing.Point(79, 391);
             this.labelFreq.Name = "labelFreq";
             this.labelFreq.Size = new System.Drawing.Size(57, 13);
             this.labelFreq.TabIndex = 8;
@@ -140,7 +134,7 @@
             // labelAmplitude
             // 
             this.labelAmplitude.AutoSize = true;
-            this.labelAmplitude.Location = new System.Drawing.Point(26, 391);
+            this.labelAmplitude.Location = new System.Drawing.Point(23, 391);
             this.labelAmplitude.Name = "labelAmplitude";
             this.labelAmplitude.Size = new System.Drawing.Size(53, 13);
             this.labelAmplitude.TabIndex = 9;
@@ -148,7 +142,7 @@
             // 
             // trackBarLinesCount
             // 
-            this.trackBarLinesCount.Location = new System.Drawing.Point(148, 410);
+            this.trackBarLinesCount.Location = new System.Drawing.Point(138, 410);
             this.trackBarLinesCount.Maximum = 200;
             this.trackBarLinesCount.Minimum = 10;
             this.trackBarLinesCount.Name = "trackBarLinesCount";
@@ -156,12 +150,12 @@
             this.trackBarLinesCount.Size = new System.Drawing.Size(45, 169);
             this.trackBarLinesCount.TabIndex = 7;
             this.trackBarLinesCount.Value = 10;
-            this.trackBarLinesCount.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBarLinesCount.Scroll += new System.EventHandler(this.trackBarLines_Scroll);
             // 
             // labelLinesCount
             // 
             this.labelLinesCount.AutoSize = true;
-            this.labelLinesCount.Location = new System.Drawing.Point(145, 391);
+            this.labelLinesCount.Location = new System.Drawing.Point(135, 391);
             this.labelLinesCount.Name = "labelLinesCount";
             this.labelLinesCount.Size = new System.Drawing.Size(32, 13);
             this.labelLinesCount.TabIndex = 8;
@@ -184,20 +178,42 @@
             this.openPictureDialog.InitialDirectory = "@\"c:\\\"";
             this.openPictureDialog.Title = "Browse pictures ...";
             // 
+            // trackBarDetails
+            // 
+            this.trackBarDetails.Location = new System.Drawing.Point(194, 410);
+            this.trackBarDetails.Maximum = 500;
+            this.trackBarDetails.Minimum = 10;
+            this.trackBarDetails.Name = "trackBarDetails";
+            this.trackBarDetails.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarDetails.Size = new System.Drawing.Size(45, 169);
+            this.trackBarDetails.TabIndex = 7;
+            this.trackBarDetails.Value = 10;
+            this.trackBarDetails.Scroll += new System.EventHandler(this.trackBarDetails_Scroll);
+            // 
+            // labelDetail
+            // 
+            this.labelDetail.AutoSize = true;
+            this.labelDetail.Location = new System.Drawing.Point(191, 391);
+            this.labelDetail.Name = "labelDetail";
+            this.labelDetail.Size = new System.Drawing.Size(39, 13);
+            this.labelDetail.TabIndex = 11;
+            this.labelDetail.Text = "Details";
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 718);
+            this.ClientSize = new System.Drawing.Size(1656, 938);
+            this.Controls.Add(this.labelDetail);
             this.Controls.Add(this.buttonOpenFile);
             this.Controls.Add(this.labelAmplitude);
             this.Controls.Add(this.labelLinesCount);
             this.Controls.Add(this.labelFreq);
+            this.Controls.Add(this.trackBarDetails);
             this.Controls.Add(this.trackBarLinesCount);
             this.Controls.Add(this.trackBarFreq);
             this.Controls.Add(this.trackBarAmpl);
-            this.Controls.Add(this.process_button);
             this.Controls.Add(this.label_output);
             this.Controls.Add(this.pb_draw);
             this.Controls.Add(this.pb_original);
@@ -215,11 +231,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarDetails)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
         #endregion
 
         private System.Windows.Forms.PictureBox pb_original;
@@ -227,7 +243,6 @@
         private System.Windows.Forms.RichTextBox debugBox;
         private System.Windows.Forms.PictureBox pb_draw;
         private System.Windows.Forms.Label label_output;
-        private System.Windows.Forms.Button process_button;
         private System.Windows.Forms.TrackBar trackBarAmpl;
         private System.Windows.Forms.TrackBar trackBarFreq;
         private System.Windows.Forms.Label labelFreq;
@@ -236,6 +251,8 @@
         private System.Windows.Forms.Label labelLinesCount;
         private System.Windows.Forms.Button buttonOpenFile;
         private System.Windows.Forms.OpenFileDialog openPictureDialog;
+        private System.Windows.Forms.TrackBar trackBarDetails;
+        private System.Windows.Forms.Label labelDetail;
     }
 }
 
