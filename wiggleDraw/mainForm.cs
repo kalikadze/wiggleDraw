@@ -51,6 +51,10 @@ namespace wiggleDraw
             if (dr == DialogResult.OK)
             {
                 pb_original.Image = Image.FromFile(openPictureDialog.FileName);
+
+                //set max values for trackbars
+                trackBarDetails.Maximum = pb_original.Image.Width - 5;
+                trackBarLinesCount.Maximum = pb_original.Image.Height - 5;
             }
         }
 
@@ -60,8 +64,8 @@ namespace wiggleDraw
             {
                 long[,] cmat, amat;
 
-                Analyzer analyzer = new Analyzer(pb_original, 20, 10);
-                analyzer.analyze(pb_original);
+                Analyzer analyzer = new Analyzer(pb_original, trackBarLinesCount.Value, trackBarDetails.Value);
+                analyzer.analyze();
                 Drawer drawer = new Drawer(pb_draw);
 
                 cmat = analyzer.getColorMatrix();

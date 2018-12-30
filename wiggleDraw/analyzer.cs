@@ -18,25 +18,27 @@ namespace wiggleDraw
         private long[,] amat;
         private int xseg;
         private int yseg;
+        private PictureBox pb;
 
 
         public Analyzer(PictureBox pb, int yseg, int xseg)
         {
-            cmat = new long[pb.Image.Width / xseg, pb.Image.Height / yseg];
-            amat = new long[pb.Image.Width / xseg, pb.Image.Height / yseg];
+            cmat = new long[xseg, yseg];
+            amat = new long[xseg, yseg];
 
             this.xseg = xseg;
             this.yseg = yseg;
+            this.pb = pb;
 
-            for (int i = 0; i < pb.Image.Width / xseg; i++)
-                for (int j = 0; j < pb.Image.Height / yseg; j++)
+            for (int i = 0; i < xseg; i++)
+                for (int j = 0; j < yseg; j++)
                 {
                     cmat[i, j] = Int32.MaxValue;
                     amat[i, j] = Int32.MaxValue;
                 }
         }
 
-        public void analyze(PictureBox pb)
+        public void analyze()
         {
             Color pixel;
             Color minPixel;
@@ -52,17 +54,18 @@ namespace wiggleDraw
             {
                 Bitmap img = (Bitmap)pb.Image.Clone();
 
-                for (int x = 0; x < img.Width / xseg; x++)
-                    for (int y = 0; y < img.Height / yseg; y++)
+                for (int x = 0; x < xseg; x++)
+                    for (int y = 0; y < yseg; y++)
                     {
                         avgSegC = 0;
                         avgSegA = 0;
                         cntSeg = 0;
 
-                        for (int xx = 0; xx < xseg; xx++)
-                            for (int yy = 0; yy < yseg; yy++)
+                        // toto indexovanie, v ramci oblasti nieje v poriadku, treba si to nakreslit a premysliet 
+                        for (int xx = 0; xx < pb.Image.Width / xseg; xx++)
+                            for (int yy = 0; yy < pb.Image.Height / yseg; yy++)
                             {
-                                if (((xx + xseg * x) < img.Width) && ((yy + yseg * y) < img.Height))
+                                if (((xx + xseg * x) < pb.Image.Width) && ((yy + yseg * y) < pb.Image.Height))
                                 {
                                     pixel = img.GetPixel(xx + xseg * x, yy + yseg * y);
                                     argbpix = pixel.ToArgb();
