@@ -23,15 +23,15 @@ namespace wiggleDraw
 
         public Analyzer(PictureBox pb, int yseg, int xseg)
         {
-            cmat = new long[xseg, yseg];
-            amat = new long[xseg, yseg];
+            cmat = new long[xseg - 1, yseg - 1];
+            amat = new long[xseg - 1, yseg - 1];
 
             this.xseg = xseg;
             this.yseg = yseg;
             this.pb = pb;
 
-            for (int i = 0; i < xseg; i++)
-                for (int j = 0; j < yseg; j++)
+            for (int i = 0; i < xseg - 1; i++)
+                for (int j = 0; j < yseg - 1; j++)
                 {
                     cmat[i, j] = Int32.MaxValue;
                     amat[i, j] = Int32.MaxValue;
@@ -49,25 +49,27 @@ namespace wiggleDraw
             long argbpix;    
             long cntSeg;     // segment points
 
+            float xs = pb.Image.Width / xseg;
+            float ys = pb.Image.Height / yseg;
+
 
             if (pb.Image != null)
             {
                 Bitmap img = (Bitmap)pb.Image.Clone();
 
-                for (int x = 0; x < xseg; x++)
-                    for (int y = 0; y < yseg; y++)
+                for (int xn = 0; xn < xseg - 1; xn++)
+                    for (int yn = 0; yn < yseg - 1; yn++)
                     {
                         avgSegC = 0;
                         avgSegA = 0;
                         cntSeg = 0;
 
-                        // toto indexovanie, v ramci oblasti nieje v poriadku, treba si to nakreslit a premysliet 
-                        for (int xx = 0; xx < pb.Image.Width / xseg; xx++)
-                            for (int yy = 0; yy < pb.Image.Height / yseg; yy++)
+                        for (int x = 0; x < xs; x++)
+                            for (int y = 0; y < ys; y++)
                             {
-                                if (((xx + xseg * x) < pb.Image.Width) && ((yy + yseg * y) < pb.Image.Height))
+                                if (((x + xs * xn) < pb.Image.Width) && ((y + ys * yn) < pb.Image.Height))
                                 {
-                                    pixel = img.GetPixel(xx + xseg * x, yy + yseg * y);
+                                    pixel = img.GetPixel((int)(x + xs * xn), (int)(y + ys * yn));
                                     argbpix = pixel.ToArgb();
                                     avgSegC += argbpix;
                                     avgSegA += pixel.A;
@@ -76,8 +78,8 @@ namespace wiggleDraw
                             }
                         avgSegC /= cntSeg;
                         avgSegA /= cntSeg;
-                        cmat[x, y] = avgSegC;
-                        amat[x, y] = avgSegA;
+                        cmat[xn, yn] = avgSegC;
+                        amat[xn, yn] = avgSegA;
                     }
             }
         }

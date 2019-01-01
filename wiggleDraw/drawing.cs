@@ -61,13 +61,6 @@ namespace wiggleDraw
             }
         }
 
-        private int makeDebugLine(int xorig, int yorig, int startY, int xseg, int yseg, long ampl, long freq)
-        {
-            gr.DrawLine(pen, xorig, yorig + pb.Height / yseg, xorig + pb.Width / xseg, yorig + pb.Height / yseg);
-            return (int)yorig;
-            //e.Graphics.DrawImageUnscaled(drawing, 0, 0);
-        }
-        
         public void generate(PaintEventArgs e, PictureBox draw,int xseg, int yseg, long ampl, long freq)
         {
             bool nl = false;
