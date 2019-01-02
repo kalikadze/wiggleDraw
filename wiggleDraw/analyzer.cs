@@ -16,12 +16,12 @@ namespace wiggleDraw
 
         private long[,] cmat;
         private long[,] amat;
-        private int xseg;
-        private int yseg;
+        public int xseg;
+        public int yseg;
         private PictureBox pb;
 
 
-        public Analyzer(PictureBox pb, int yseg, int xseg)
+        public Analyzer(PictureBox pb, int xseg, int yseg)
         {
             cmat = new long[xseg - 1, yseg - 1];
             amat = new long[xseg - 1, yseg - 1];

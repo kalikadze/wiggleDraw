@@ -40,7 +40,7 @@ namespace wiggleDraw
         {
             float y = startY, y2 = startY, x2 = lastx+1F;
 
-            for (float x = xorig; x < pb.Width/xseg + xorig; x += 1F)
+            for (float x = xorig; x < pb.Width/xseg + xorig; x += 20F)
             {
                 if (nl)
                 {
@@ -61,22 +61,19 @@ namespace wiggleDraw
             }
         }
 
-        public void generate(PaintEventArgs e, PictureBox draw,int xseg, int yseg, long ampl, long freq)
+        public Bitmap generate(PaintEventArgs e, PictureBox draw,int xseg, int yseg, long ampl, long freq, int x, int y)
         {
             bool nl = false;
-            for (int y = 0; y < yseg; y++)
-                for (int x = 0; x < xseg; x++)
-                        {
-                            if (((x * pb.Width / xseg) < pb.Width) && ((y * pb.Height / yseg) < pb.Height))
-                            {
-                                if (x == 0)
-                                    nl = true;
-                                else
-                                    nl = false;
-                                makeSine(x * pb.Width / xseg, y * pb.Height / yseg, lastx, lasty, xseg, yseg, ampl, freq, nl);
-                            }
-                        }
-            e.Graphics.DrawImageUnscaled(drawing, 0, 0);
+
+            if (((x * pb.Width / xseg) < pb.Width) && ((y * pb.Height / yseg) < pb.Height))
+            {
+                if (x == 0)
+                    nl = true;
+                else
+                    nl = false;
+                makeSine(x * pb.Width / xseg, y * pb.Height / yseg, lastx, lasty, xseg, yseg, ampl, freq, nl);
+            }
+            return drawing;
         }
     }
 }
