@@ -70,7 +70,7 @@ namespace wiggleDraw
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            //debugBox.Text = e.ProgressPercentage.ToString() + "%";
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -80,16 +80,22 @@ namespace wiggleDraw
             {
                 Graphics gr_pb_draw;
                 gr_pb_draw = pb_draw.CreateGraphics();
-                gr_pb_draw = Graphics.FromImage(drawing);
                 gr_pb_draw.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                gr_pb_draw.DrawImageUnscaled(drawing, 0, 0);
-                pb_draw.Refresh();
+                pb_draw.Image = drawing;
+
             }
-            //e.Graphics.DrawImageUnscaled(drawing, 0, 0);
         }
 
         private void bw_doPaint(object sender, DoWorkEventArgs e)
         {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;                
+            }
+
             if (pb_original.Image != null )
             {
                 //init 
@@ -111,7 +117,10 @@ namespace wiggleDraw
 
                 for (int yn = 0; yn < yseg - 1; yn++)
                     for (int xn = 0; xn < xseg - 1; xn++)
-                        drawing = drawer.generate(pearg, pb_draw, xseg, yseg, ampl * Math.Abs(cmat[xn, yn] / 1000000), freq * Math.Abs(cmat[xn, yn] / 1000000), xn, yn);
+                    {
+                        drawing = drawer.generate(pearg, pb_draw, xseg, yseg, ampl * Math.Abs(cmat[xn, yn] / 10000000), freq * Math.Abs(cmat[xn, yn] / 1000000), xn, yn);
+                        worker.ReportProgress((xn * yn) / ((xseg - 1) * (yseg - 1)));
+                    }
             }
         }
 

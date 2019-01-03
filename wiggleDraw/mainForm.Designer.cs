@@ -104,7 +104,7 @@ namespace wiggleDraw
             // trackBarAmpl
             // 
             this.trackBarAmpl.Location = new System.Drawing.Point(26, 410);
-            this.trackBarAmpl.Maximum = 20;
+            this.trackBarAmpl.Maximum = 2000;
             this.trackBarAmpl.Name = "trackBarAmpl";
             this.trackBarAmpl.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarAmpl.Size = new System.Drawing.Size(45, 169);
