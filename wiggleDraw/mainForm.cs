@@ -20,6 +20,7 @@ namespace wiggleDraw
         BackgroundWorker bw = new BackgroundWorker();
         // drawing
         Bitmap drawing;
+        bool needpaint = false;
 
         public mainForm()
         {
@@ -40,19 +41,23 @@ namespace wiggleDraw
         private void trackBarFreq_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
+            needpaint = true;
         }
         private void trackBarAmpl_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
+            needpaint = true;
         }
         private void trackBarLines_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
+            needpaint = true;
         }
 
         private void trackBarDetails_Scroll(object sender, EventArgs e)
         {
             pb_draw.Refresh();
+            needpaint = true;
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -75,14 +80,10 @@ namespace wiggleDraw
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
             if (drawing != null)
             {
-                Graphics gr_pb_draw;
-                gr_pb_draw = pb_draw.CreateGraphics();
-                gr_pb_draw.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 pb_draw.Image = drawing;
-
+                drawing = null;
             }
         }
 
@@ -121,6 +122,13 @@ namespace wiggleDraw
                         drawing = drawer.generate(pearg, pb_draw, xseg, yseg, ampl * Math.Abs(cmat[xn, yn] / 10000000), freq * Math.Abs(cmat[xn, yn] / 1000000), xn, yn);
                         worker.ReportProgress((xn * yn) / ((xseg - 1) * (yseg - 1)));
                     }
+                // this routine run only when user want it
+                string s = drawer.svg_graphics.WriteSVGString();
+                string tempFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "foo.svg");
+                StreamWriter tw = new StreamWriter(tempFile, false);
+                tw.Write(s);
+                tw.Close();
+                //
             }
         }
 
@@ -129,10 +137,11 @@ namespace wiggleDraw
             // prepare data to pass
             data2pass d2p = new data2pass(trackBarDetails.Value, trackBarLinesCount.Value, trackBarAmpl.Value, trackBarFreq.Value, e);
 
-            if (bw.IsBusy != true)
+            if (bw.IsBusy != true && needpaint)
             {
                 bw.RunWorkerAsync(d2p);
             }
+            needpaint = false;
         }
     }
 }
