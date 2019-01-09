@@ -14,15 +14,18 @@ namespace wiggleDraw
         private int yseg;
         private int ampl;
         private int freq;
+        private bool save;
         private PaintEventArgs pe;
 
-        public data2pass(int xseg, int yseg, int ampl, int freq, PaintEventArgs pe)
+        public data2pass(int xseg, int yseg, int ampl, int freq, PaintEventArgs pe, bool save = false)
         {
             this.xseg = xseg;
             this.yseg = yseg;
             this.ampl = ampl;
             this.freq = freq;
             this.pe = pe;
+            this.save = save;
+
         }
 
         public int get_ampl()
@@ -43,6 +46,11 @@ namespace wiggleDraw
         public int get_yseg()
         {
             return yseg;
+        }
+
+        public bool gets_saveflag()
+        {
+            return save;
         }
 
         public PaintEventArgs get_pe_arg()

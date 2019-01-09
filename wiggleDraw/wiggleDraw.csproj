@@ -90,6 +90,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Custom-Icon-Design-Mono-General-1-Save.ico" />
     <Content Include="favicon.ico" />
     <None Include="Pelfusion-Flat-Folder-Open-Folder.ico" />
   </ItemGroup>

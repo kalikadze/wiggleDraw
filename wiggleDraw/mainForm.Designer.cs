@@ -46,6 +46,7 @@ namespace wiggleDraw
             this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.trackBarDetails = new System.Windows.Forms.TrackBar();
             this.labelDetail = new System.Windows.Forms.Label();
+            this.savebutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
@@ -199,12 +200,23 @@ namespace wiggleDraw
             this.labelDetail.TabIndex = 11;
             this.labelDetail.Text = "Details";
             // 
+            // savebutton
+            // 
+            this.savebutton.Image = ((System.Drawing.Image)(resources.GetObject("savebutton.Image")));
+            this.savebutton.Location = new System.Drawing.Point(310, 544);
+            this.savebutton.Name = "savebutton";
+            this.savebutton.Size = new System.Drawing.Size(75, 35);
+            this.savebutton.TabIndex = 12;
+            this.savebutton.UseVisualStyleBackColor = true;
+            this.savebutton.Click += new System.EventHandler(this.savebutton_Click);
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1656, 938);
+            this.Controls.Add(this.savebutton);
             this.Controls.Add(this.labelDetail);
             this.Controls.Add(this.buttonOpenFile);
             this.Controls.Add(this.labelAmplitude);
@@ -253,6 +265,7 @@ namespace wiggleDraw
         private System.Windows.Forms.OpenFileDialog openPictureDialog;
         private System.Windows.Forms.TrackBar trackBarDetails;
         private System.Windows.Forms.Label labelDetail;
+        private System.Windows.Forms.Button savebutton;
     }
 }
 
