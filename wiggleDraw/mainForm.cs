@@ -76,7 +76,8 @@ namespace wiggleDraw
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //debugBox.Text = e.ProgressPercentage.ToString() + "%";
+            int prgrs = e.ProgressPercentage;
+            progressBar.Value = prgrs;
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -103,6 +104,8 @@ namespace wiggleDraw
                 //init 
                 long[,] cmat, amat;
                 data2pass received_data = (data2pass)e.Argument;
+                float progress = 0F;
+                int counter = 0;
                 
                 int xseg = received_data.get_xseg();
                 int yseg = received_data.get_yseg();
@@ -122,7 +125,10 @@ namespace wiggleDraw
                     for (int xn = 0; xn < xseg - 1; xn++)
                     {
                         drawing = drawer.generate(pearg, pb_draw, xseg, yseg, ampl * Math.Abs(cmat[xn, yn] / 10000000), freq * Math.Abs(cmat[xn, yn] / 1000000), xn, yn);
-                        worker.ReportProgress((xn * yn) / ((xseg - 1) * (yseg - 1)));
+                        counter++;
+                        progress = (float)(counter * 100) / (float)((xseg - 1) * (yseg - 1));
+
+                        worker.ReportProgress((int)progress);
                     }
 
                 // this routine run only when user want it

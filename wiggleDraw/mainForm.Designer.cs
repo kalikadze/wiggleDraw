@@ -47,6 +47,7 @@ namespace wiggleDraw
             this.trackBarDetails = new System.Windows.Forms.TrackBar();
             this.labelDetail = new System.Windows.Forms.Label();
             this.savebutton = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
@@ -210,12 +211,20 @@ namespace wiggleDraw
             this.savebutton.UseVisualStyleBackColor = true;
             this.savebutton.Click += new System.EventHandler(this.savebutton_Click);
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(26, 702);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(359, 23);
+            this.progressBar.TabIndex = 13;
+            // 
             // mainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1656, 938);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.savebutton);
             this.Controls.Add(this.labelDetail);
             this.Controls.Add(this.buttonOpenFile);
@@ -266,6 +275,7 @@ namespace wiggleDraw
         private System.Windows.Forms.TrackBar trackBarDetails;
         private System.Windows.Forms.Label labelDetail;
         private System.Windows.Forms.Button savebutton;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
