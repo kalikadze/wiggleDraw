@@ -21,6 +21,7 @@ namespace wiggleDraw
         // drawing
         Bitmap drawing;
         bool needpaint = false;
+        bool needsave = false;
 
         public mainForm()
         {
@@ -128,7 +129,7 @@ namespace wiggleDraw
                 if (saveflag)
                 {
                     string s = drawer.svg_graphics.WriteSVGString();
-                    string tempFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "foo.svg");
+                    string tempFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "exported_pic" + DateTime.Now.ToString().Replace(" ", "").Replace(":","_").Replace(".", "-") + ".svg");
                     StreamWriter tw = new StreamWriter(tempFile, false);
                     tw.Write(s);
                     tw.Close();
@@ -139,25 +140,21 @@ namespace wiggleDraw
         private void pb_draw_Paint(object sender, PaintEventArgs e)
         {
             // prepare data to pass
-            data2pass d2p = new data2pass(trackBarDetails.Value, trackBarLinesCount.Value, trackBarAmpl.Value, trackBarFreq.Value, e);
+            data2pass d2p = new data2pass(trackBarDetails.Value, trackBarLinesCount.Value, trackBarAmpl.Value, trackBarFreq.Value, e, needsave);
 
             if (bw.IsBusy != true && needpaint)
             {
                 bw.RunWorkerAsync(d2p);
             }
             needpaint = false;
+            needsave = false;
         }
 
         private void savebutton_Click(object sender, EventArgs e)
         {
-            // prepare data to pass
-            data2pass d2p = new data2pass(trackBarDetails.Value, trackBarLinesCount.Value, trackBarAmpl.Value, trackBarFreq.Value, (PaintEventArgs)e, true);
-
-            if (bw.IsBusy != true && needpaint)
-            {
-                bw.RunWorkerAsync(d2p);
-            }
-            needpaint = false;
+            needsave = true;
+            needpaint = true;
+            pb_draw.Invalidate();
         }
     }
 }
