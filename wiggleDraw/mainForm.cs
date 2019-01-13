@@ -71,6 +71,10 @@ namespace wiggleDraw
                 //set max values for trackbars
                 trackBarDetails.Maximum = pb_original.Image.Width - 5;
                 trackBarLinesCount.Maximum = pb_original.Image.Height - 5;
+
+                // debug
+                pb_draw.Height = pb_original.Height;
+                pb_draw.Width = pb_original.Width;
             }
         }
 
