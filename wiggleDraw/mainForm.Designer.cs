@@ -31,10 +31,8 @@ namespace wiggleDraw
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            this.pb_original = new System.Windows.Forms.PictureBox();
             this.label_pb = new System.Windows.Forms.Label();
             this.debugBox = new System.Windows.Forms.RichTextBox();
-            this.pb_draw = new System.Windows.Forms.PictureBox();
             this.label_output = new System.Windows.Forms.Label();
             this.trackBarAmpl = new System.Windows.Forms.TrackBar();
             this.trackBarFreq = new System.Windows.Forms.TrackBar();
@@ -42,30 +40,23 @@ namespace wiggleDraw
             this.labelAmplitude = new System.Windows.Forms.Label();
             this.trackBarLinesCount = new System.Windows.Forms.TrackBar();
             this.labelLinesCount = new System.Windows.Forms.Label();
-            this.buttonOpenFile = new System.Windows.Forms.Button();
             this.openPictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.trackBarDetails = new System.Windows.Forms.TrackBar();
             this.labelDetail = new System.Windows.Forms.Label();
-            this.savebutton = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
+            this.checkBoxRefresh = new System.Windows.Forms.CheckBox();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.savebutton = new System.Windows.Forms.Button();
+            this.buttonOpenFile = new System.Windows.Forms.Button();
+            this.pb_draw = new System.Windows.Forms.PictureBox();
+            this.pb_original = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_original)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pb_original
-            // 
-            this.pb_original.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pb_original.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_original.Location = new System.Drawing.Point(26, 34);
-            this.pb_original.Name = "pb_original";
-            this.pb_original.Size = new System.Drawing.Size(359, 340);
-            this.pb_original.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_original.TabIndex = 0;
-            this.pb_original.TabStop = false;
             // 
             // label_pb
             // 
@@ -83,16 +74,6 @@ namespace wiggleDraw
             this.debugBox.Size = new System.Drawing.Size(359, 81);
             this.debugBox.TabIndex = 2;
             this.debugBox.Text = "";
-            // 
-            // pb_draw
-            // 
-            this.pb_draw.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_draw.Location = new System.Drawing.Point(400, 34);
-            this.pb_draw.Name = "pb_draw";
-            this.pb_draw.Size = new System.Drawing.Size(1244, 892);
-            this.pb_draw.TabIndex = 3;
-            this.pb_draw.TabStop = false;
-            this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_draw_Paint);
             // 
             // label_output
             // 
@@ -163,16 +144,6 @@ namespace wiggleDraw
             this.labelLinesCount.TabIndex = 8;
             this.labelLinesCount.Text = "Lines";
             // 
-            // buttonOpenFile
-            // 
-            this.buttonOpenFile.Image = global::wiggleDraw.Properties.Resources.Pelfusion_Flat_Folder_Open_Folder;
-            this.buttonOpenFile.Location = new System.Drawing.Point(310, 380);
-            this.buttonOpenFile.Name = "buttonOpenFile";
-            this.buttonOpenFile.Size = new System.Drawing.Size(75, 36);
-            this.buttonOpenFile.TabIndex = 10;
-            this.buttonOpenFile.UseVisualStyleBackColor = true;
-            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
-            // 
             // openPictureDialog
             // 
             this.openPictureDialog.DefaultExt = "\"jpg\"";
@@ -201,6 +172,33 @@ namespace wiggleDraw
             this.labelDetail.TabIndex = 11;
             this.labelDetail.Text = "Details";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(26, 702);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(359, 23);
+            this.progressBar.TabIndex = 13;
+            // 
+            // checkBoxRefresh
+            // 
+            this.checkBoxRefresh.AutoSize = true;
+            this.checkBoxRefresh.Location = new System.Drawing.Point(297, 480);
+            this.checkBoxRefresh.Name = "checkBoxRefresh";
+            this.checkBoxRefresh.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxRefresh.TabIndex = 14;
+            this.checkBoxRefresh.Text = "Auto Refresh";
+            this.checkBoxRefresh.UseVisualStyleBackColor = true;
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Image = global::wiggleDraw.Properties.Resources.Rafiqul_Hassan_Blogger_Refresh_2;
+            this.refreshButton.Location = new System.Drawing.Point(310, 503);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(75, 35);
+            this.refreshButton.TabIndex = 15;
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
             // savebutton
             // 
             this.savebutton.Image = ((System.Drawing.Image)(resources.GetObject("savebutton.Image")));
@@ -211,12 +209,36 @@ namespace wiggleDraw
             this.savebutton.UseVisualStyleBackColor = true;
             this.savebutton.Click += new System.EventHandler(this.savebutton_Click);
             // 
-            // progressBar
+            // buttonOpenFile
             // 
-            this.progressBar.Location = new System.Drawing.Point(26, 702);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(359, 23);
-            this.progressBar.TabIndex = 13;
+            this.buttonOpenFile.Image = global::wiggleDraw.Properties.Resources.Pelfusion_Flat_Folder_Open_Folder;
+            this.buttonOpenFile.Location = new System.Drawing.Point(310, 380);
+            this.buttonOpenFile.Name = "buttonOpenFile";
+            this.buttonOpenFile.Size = new System.Drawing.Size(75, 36);
+            this.buttonOpenFile.TabIndex = 10;
+            this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
+            // 
+            // pb_draw
+            // 
+            this.pb_draw.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_draw.Location = new System.Drawing.Point(400, 34);
+            this.pb_draw.Name = "pb_draw";
+            this.pb_draw.Size = new System.Drawing.Size(1244, 892);
+            this.pb_draw.TabIndex = 3;
+            this.pb_draw.TabStop = false;
+            this.pb_draw.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_draw_Paint);
+            // 
+            // pb_original
+            // 
+            this.pb_original.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pb_original.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_original.Location = new System.Drawing.Point(26, 34);
+            this.pb_original.Name = "pb_original";
+            this.pb_original.Size = new System.Drawing.Size(359, 340);
+            this.pb_original.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_original.TabIndex = 0;
+            this.pb_original.TabStop = false;
             // 
             // mainForm
             // 
@@ -224,6 +246,8 @@ namespace wiggleDraw
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1656, 938);
+            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.checkBoxRefresh);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.savebutton);
             this.Controls.Add(this.labelDetail);
@@ -247,12 +271,12 @@ namespace wiggleDraw
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.onDragEnter);
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.OnDragOver);
             this.DragLeave += new System.EventHandler(this.OnDragLeave);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_original)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmpl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFreq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLinesCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_draw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_original)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,6 +300,8 @@ namespace wiggleDraw
         private System.Windows.Forms.Label labelDetail;
         private System.Windows.Forms.Button savebutton;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.CheckBox checkBoxRefresh;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
 

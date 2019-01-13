@@ -41,24 +41,39 @@ namespace wiggleDraw
 
         private void trackBarFreq_Scroll(object sender, EventArgs e)
         {
-            pb_draw.Refresh();
-            needpaint = true;
+            if (checkBoxRefresh.Checked)
+            {
+                needpaint = true;
+                pb_draw.Refresh();
+            }
         }
+
         private void trackBarAmpl_Scroll(object sender, EventArgs e)
         {
-            pb_draw.Refresh();
-            needpaint = true;
+            if (checkBoxRefresh.Checked)
+            {
+                needpaint = true;
+                pb_draw.Refresh();
+            }
         }
+
         private void trackBarLines_Scroll(object sender, EventArgs e)
         {
-            pb_draw.Refresh();
-            needpaint = true;
+            if (checkBoxRefresh.Checked)
+            {
+                trackBarDetails.Value = (int)((pb_original.Width * trackBarLinesCount.Value) / pb_original.Height);
+                needpaint = true;
+                pb_draw.Refresh();
+            }
         }
 
         private void trackBarDetails_Scroll(object sender, EventArgs e)
         {
-            pb_draw.Refresh();
-            needpaint = true;
+            if (checkBoxRefresh.Checked)
+            {
+                needpaint = true;
+                pb_draw.Refresh();
+            }
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -73,8 +88,8 @@ namespace wiggleDraw
                 trackBarLinesCount.Maximum = pb_original.Image.Height - 5;
 
                 // debug
-                pb_draw.Height = pb_original.Height;
-                pb_draw.Width = pb_original.Width;
+                pb_draw.Height = pb_original.Image.Height;
+                pb_draw.Width = pb_original.Image.Width;
             }
         }
 
@@ -165,6 +180,12 @@ namespace wiggleDraw
             needsave = true;
             needpaint = true;
             pb_draw.Invalidate();
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            needpaint = true;
+            pb_draw.Refresh();
         }
     }
 }

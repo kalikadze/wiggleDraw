@@ -92,6 +92,7 @@
   <ItemGroup>
     <Content Include="Custom-Icon-Design-Mono-General-1-Save.ico" />
     <Content Include="favicon.ico" />
+    <Content Include="Rafiqul-Hassan-Blogger-Refresh-2.ico" />
     <None Include="Pelfusion-Flat-Folder-Open-Folder.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

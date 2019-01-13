@@ -65,8 +65,8 @@ namespace wiggleDraw
                 }
                 pb_original.Image = image;
                 //debug
-                pb_draw.Height = pb_original.Height;
-                pb_draw.Width = pb_original.Width;
+                pb_draw.Height = pb_original.Image.Height;
+                pb_draw.Width = pb_original.Image.Width;
             }
         }
 
